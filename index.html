@@ -1,32 +1,1360 @@
 
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Gelato Gallery - Artisanal Gelato</title>
-    <meta name="description" content="Premium artisanal gelato, merging tradition with innovation" />
-    <meta name="author" content="Gelato Gallery" />
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gelato Gallery - Artisanal Gelato</title>
+  <meta name="description" content="Premium artisanal gelato, merging tradition with innovation" />
+  <meta name="author" content="Gelato Gallery" />
 
-    <meta property="og:title" content="Gelato Gallery - Artisanal Gelato" />
-    <meta property="og:description" content="Premium artisanal gelato, merging tradition with innovation" />
-    <meta property="og:type" content="website" />
-    <meta property="og:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
+  <meta property="og:title" content="Gelato Gallery - Artisanal Gelato" />
+  <meta property="og:description" content="Premium artisanal gelato, merging tradition with innovation" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
 
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:site" content="@gelatogallery" />
-    <meta name="twitter:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:site" content="@gelatogallery" />
+  <meta name="twitter:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
+  
+  <!-- CSS Styles -->
+  <style>
+    /* Base Styles */
+    :root {
+      --color-black: #121212;
+      --color-white: #FFFFFF;
+      --color-cream: #F8F3E9;
+      --color-pink: #FFDEE2;
+      --color-green: #D6F2D6;
+      --color-yellow: #FFF4CC;
+      --color-red: #FFCCCB;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      color: var(--color-black);
+      line-height: 1.6;
+      background-color: var(--color-white);
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+      font-family: 'Playfair Display', serif;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* Container */
+    .container {
+      width: 100%;
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      background-color: var(--color-black);
+      color: var(--color-white);
+      padding: 0.75rem 2rem;
+      font-size: 0.875rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .btn:hover {
+      opacity: 0.9;
+    }
+
+    .btn-white {
+      background-color: var(--color-white);
+      color: var(--color-black);
+    }
+
+    /* Navigation */
+    .header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      padding: 1.5rem 0;
+      transition: all 0.3s ease;
+    }
+
+    .header.scrolled {
+      background-color: var(--color-white);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      padding: 0.75rem 0;
+    }
+
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 700;
+      font-family: 'Playfair Display', serif;
+    }
+
+    .nav-links {
+      display: none;
+    }
+
+    .nav-links a {
+      position: relative;
+      margin-left: 2.5rem;
+      font-weight: 500;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 2px;
+      bottom: -2px;
+      left: 0;
+      background-color: var(--color-black);
+      transform: scaleX(0);
+      transform-origin: bottom right;
+      transition: transform 0.3s ease;
+    }
+
+    .nav-links a:hover::after {
+      transform: scaleX(1);
+      transform-origin: bottom left;
+    }
+
+    .mobile-menu-btn {
+      display: block;
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 1.5rem;
+    }
+
+    .mobile-menu {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: var(--color-white);
+      z-index: 1100;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.3s ease;
+    }
+
+    .mobile-menu.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .mobile-menu a {
+      display: block;
+      margin: 1rem 0;
+      font-size: 1.25rem;
+      position: relative;
+    }
+
+    .mobile-menu a::after {
+      content: '';
+      position: absolute;
+      width: 100%;
+      height: 2px;
+      bottom: -2px;
+      left: 0;
+      background-color: var(--color-black);
+      transform: scaleX(0);
+      transform-origin: bottom right;
+      transition: transform 0.3s ease;
+    }
+
+    .mobile-menu a:hover::after {
+      transform: scaleX(1);
+      transform-origin: bottom left;
+    }
+
+    .close-menu {
+      position: absolute;
+      top: 2rem;
+      right: 2rem;
+      background: none;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+
+    /* Hero Section */
+    .hero {
+      position: relative;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: var(--color-black);
+      overflow: hidden;
+    }
+
+    .hero-img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0.7;
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background-color: rgba(0, 0, 0, 0.4);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 10;
+      color: var(--color-white);
+      text-align: center;
+      max-width: 800px;
+      padding: 0 1rem;
+    }
+
+    .hero-title {
+      font-size: 3rem;
+      margin-bottom: 1.5rem;
+      animation: fadeIn 1s ease;
+    }
+
+    .hero-subtitle {
+      font-size: 1.25rem;
+      font-weight: 300;
+      margin-bottom: 2.5rem;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+      animation: fadeIn 1s ease 0.2s forwards;
+      opacity: 0;
+    }
+
+    .scroll-btn {
+      position: absolute;
+      bottom: 2.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      color: var(--color-white);
+      font-size: 2rem;
+      animation: bounce 2s infinite;
+      z-index: 10;
+      cursor: pointer;
+      background: none;
+      border: none;
+    }
+
+    /* Our Story Section */
+    .section {
+      padding: 5rem 0;
+    }
+
+    .section-title {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+    }
+
+    .section-subtitle {
+      font-size: 1.25rem;
+      font-weight: 300;
+      margin-bottom: 3rem;
+      max-width: 600px;
+    }
+
+    .story {
+      background-color: var(--color-white);
+    }
+
+    .story-container {
+      display: flex;
+      flex-direction: column;
+      gap: 4rem;
+    }
+
+    .story-text {
+      flex: 1;
+    }
+
+    .story-text p {
+      margin-bottom: 1.5rem;
+      font-size: 1.125rem;
+    }
+
+    .story-image {
+      flex: 1;
+      position: relative;
+    }
+
+    .story-image-wrapper {
+      position: relative;
+    }
+
+    .story-blob {
+      position: absolute;
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      z-index: -1;
+    }
+
+    .blob-pink {
+      top: -20px;
+      left: -20px;
+      background-color: var(--color-pink);
+    }
+
+    .blob-green {
+      bottom: -20px;
+      right: -20px;
+      background-color: var(--color-green);
+      width: 128px;
+      height: 128px;
+    }
+
+    .story-img {
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    }
+
+    /* Flavors Section */
+    .flavors {
+      background-color: var(--color-cream);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .flavors-grid {
+      display: grid;
+      grid-template-columns: repeat(1, 1fr);
+      gap: 2rem;
+    }
+
+    .flavor-card {
+      position: relative;
+      background-color: var(--color-white);
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .flavor-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+    }
+
+    .flavor-image {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+
+    .flavor-content {
+      padding: 1.5rem;
+    }
+
+    .flavor-title {
+      font-size: 1.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .flavor-description {
+      font-size: 0.875rem;
+      color: #666;
+      margin-bottom: 1rem;
+    }
+
+    .flavor-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: auto;
+    }
+
+    .flavor-tag {
+      background-color: #f0f0f0;
+      padding: 0.25rem 0.75rem;
+      border-radius: 100px;
+      font-size: 0.75rem;
+      font-weight: 500;
+    }
+
+    /* Locations Section */
+    .locations {
+      background-color: var(--color-white);
+    }
+
+    .locations-grid {
+      display: grid;
+      grid-template-columns: repeat(1, 1fr);
+      gap: 2rem;
+    }
+
+    .location-card {
+      background-color: var(--color-white);
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .location-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+    }
+
+    .location-image-container {
+      position: relative;
+      height: 200px;
+      overflow: hidden;
+    }
+
+    .location-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .location-badge {
+      position: absolute;
+      top: 0;
+      left: 0;
+      padding: 0.5rem 1rem;
+      color: var(--color-white);
+      font-weight: 500;
+      border-bottom-right-radius: 8px;
+    }
+
+    .badge-pink {
+      background-color: var(--color-pink);
+    }
+
+    .badge-yellow {
+      background-color: var(--color-yellow);
+    }
+
+    .badge-green {
+      background-color: var(--color-green);
+    }
+
+    .location-content {
+      padding: 1.5rem;
+    }
+
+    .location-name {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      margin-bottom: 1rem;
+    }
+
+    .location-name-text {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.25rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .location-address {
+      color: #666;
+    }
+
+    .location-details {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+      color: #666;
+      font-size: 0.875rem;
+    }
+
+    .location-btn {
+      width: 100%;
+      text-align: center;
+      padding: 0.75rem;
+      border: 1px solid var(--color-black);
+      text-transform: uppercase;
+      font-size: 0.875rem;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      display: block;
+    }
+
+    .location-btn:hover {
+      background-color: var(--color-black);
+      color: var(--color-white);
+    }
+
+    /* Lab Section */
+    .lab {
+      background-color: var(--color-black);
+      color: var(--color-white);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .lab-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 4rem;
+    }
+
+    .lab-image {
+      position: relative;
+    }
+
+    .lab-img {
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+      position: relative;
+      z-index: 1;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    }
+
+    .lab-blob {
+      position: absolute;
+      border-radius: 50%;
+      z-index: 0;
+    }
+
+    .lab-blob-red {
+      width: 128px;
+      height: 128px;
+      top: -20px;
+      right: -20px;
+      background-color: rgba(255, 100, 100, 0.6);
+    }
+
+    .lab-blob-yellow {
+      width: 192px;
+      height: 192px;
+      bottom: -20px;
+      left: -20px;
+      background-color: rgba(255, 200, 100, 0.6);
+    }
+
+    .lab-features {
+      display: flex;
+      flex-direction: column;
+      gap: 2.5rem;
+    }
+
+    .lab-feature {
+      margin-bottom: 2rem;
+    }
+
+    .feature-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      margin-bottom: 1rem;
+      font-size: 1.5rem;
+    }
+
+    .icon-pink {
+      background-color: rgba(255, 105, 180, 0.2);
+      color: #FF69B4;
+    }
+
+    .icon-green {
+      background-color: rgba(50, 205, 50, 0.2);
+      color: #32CD32;
+    }
+
+    .icon-yellow {
+      background-color: rgba(255, 215, 0, 0.2);
+      color: #FFD700;
+    }
+
+    .feature-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .feature-text {
+      color: #ccc;
+    }
+
+    /* Newsletter Section */
+    .newsletter {
+      background-color: var(--color-cream);
+      background-opacity: 0.3;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .newsletter-blobs {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
+
+    .newsletter-blob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(40px);
+    }
+
+    .newsletter-blob-1 {
+      top: -80px;
+      right: -80px;
+      width: 256px;
+      height: 256px;
+      background-color: var(--color-pink);
+      opacity: 0.2;
+    }
+
+    .newsletter-blob-2 {
+      bottom: -128px;
+      left: -128px;
+      width: 320px;
+      height: 320px;
+      background-color: var(--color-yellow);
+      opacity: 0.2;
+    }
+
+    .newsletter-content {
+      position: relative;
+      z-index: 1;
+      max-width: 600px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .newsletter-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      max-width: 500px;
+      margin: 2rem auto 0;
+    }
+
+    .newsletter-input {
+      flex-grow: 1;
+      padding: 0.75rem 1.5rem;
+      border: 1px solid var(--color-black);
+      font-size: 1rem;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .newsletter-input:focus {
+      outline: none;
+      border-color: #666;
+    }
+
+    .newsletter-disclaimer {
+      margin-top: 1rem;
+      font-size: 0.875rem;
+      color: #666;
+    }
+
+    /* Footer */
+    .footer {
+      background-color: var(--color-black);
+      color: var(--color-white);
+      padding: 4rem 0 2rem;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+      margin-bottom: 4rem;
+    }
+
+    .footer-column h3 {
+      font-size: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .footer-column p {
+      color: #999;
+      margin-bottom: 1.5rem;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .social-link {
+      display: inline-flex;
+      transition: color 0.3s ease;
+      font-size: 1.5rem;
+    }
+
+    .social-link:hover {
+      color: var(--color-pink);
+    }
+
+    .footer-links {
+      list-style: none;
+    }
+
+    .footer-link {
+      margin-bottom: 0.75rem;
+    }
+
+    .footer-link a {
+      color: #999;
+      transition: color 0.3s ease;
+    }
+
+    .footer-link a:hover {
+      color: var(--color-white);
+    }
+
+    .footer-info {
+      color: #999;
+      margin-bottom: 0.75rem;
+    }
+
+    .footer-bottom {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+      padding-top: 2rem;
+      border-top: 1px solid #333;
+    }
+
+    .copyright {
+      color: #666;
+      font-size: 0.875rem;
+    }
+
+    .footer-bottom-links {
+      display: flex;
+      gap: 1.5rem;
+      color: #666;
+      font-size: 0.875rem;
+    }
+
+    .language-selector {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: #666;
+      font-size: 0.875rem;
+    }
+
+    .language-dropdown {
+      background-color: transparent;
+      border: none;
+      color: #666;
+      cursor: pointer;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.875rem;
+    }
+
+    /* Scroll to Top */
+    .scroll-top {
+      position: fixed;
+      bottom: 1.5rem;
+      right: 1.5rem;
+      background-color: var(--color-black);
+      color: var(--color-white);
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+      z-index: 900;
+    }
+
+    .scroll-top.visible {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    /* Animations */
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes bounce {
+      0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0) translateX(-50%);
+      }
+      40% {
+        transform: translateY(-20px) translateX(-50%);
+      }
+      60% {
+        transform: translateY(-10px) translateX(-50%);
+      }
+    }
+
+    .animate-on-scroll {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .animate-on-scroll.animated {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Responsive Styles */
+    @media (min-width: 640px) {
+      .hero-title {
+        font-size: 4rem;
+      }
+      
+      .hero-subtitle {
+        font-size: 1.5rem;
+      }
+      
+      .newsletter-form {
+        flex-direction: row;
+      }
+      
+      .newsletter-btn {
+        width: auto;
+      }
+    }
+
+    @media (min-width: 768px) {
+      .section {
+        padding: 8rem 0;
+      }
+      
+      .flavors-grid, .locations-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      
+      .footer-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      
+      .footer-bottom {
+        flex-direction: row;
+        justify-content: space-between;
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .navbar {
+        padding: 0 2rem;
+      }
+      
+      .mobile-menu-btn {
+        display: none;
+      }
+      
+      .nav-links {
+        display: flex;
+        align-items: center;
+      }
+      
+      .hero-title {
+        font-size: 5rem;
+      }
+      
+      .story-container, .lab-grid {
+        flex-direction: row;
+        display: flex;
+        align-items: center;
+      }
+      
+      .flavors-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+      
+      .locations-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+      
+      .footer-grid {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
+  </style>
+  <script src="https://cdn.gpteng.co/gptengineer.js" type="module"></script>
+</head>
+
+<body>
+  <!-- Header -->
+  <header class="header" id="header">
+    <div class="container">
+      <div class="navbar">
+        <a href="#" class="logo">Gelato Gallery</a>
+        <nav class="nav-links">
+          <a href="#home">Home</a>
+          <a href="#about">Our Story</a>
+          <a href="#flavors">Flavors</a>
+          <a href="#locations">Locations</a>
+          <a href="#lab">The Lab</a>
+          <button class="btn">Order Now</button>
+        </nav>
+        <button class="mobile-menu-btn">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobile-menu">
+    <button class="close-menu">✕</button>
+    <a href="#home" class="mobile-link">Home</a>
+    <a href="#about" class="mobile-link">Our Story</a>
+    <a href="#flavors" class="mobile-link">Flavors</a>
+    <a href="#locations" class="mobile-link">Locations</a>
+    <a href="#lab" class="mobile-link">The Lab</a>
+    <button class="btn mt-6">Order Now</button>
+  </div>
+
+  <!-- Hero Section -->
+  <section class="hero" id="home">
+    <img src="/lovable-uploads/043276b4-25a6-42d7-b743-1bc5bb73e33a.png" alt="Artisanal gelato" class="hero-img">
+    <div class="hero-overlay"></div>
+    <div class="container">
+      <div class="hero-content">
+        <h1 class="hero-title">Gelato, <span style="font-style: italic;">but make it art.</span></h1>
+        <p class="hero-subtitle">Tradition meets innovation in every scoop of our artisanal gelato.</p>
+        <button class="btn btn-white">Discover Our World</button>
+      </div>
+    </div>
+    <button class="scroll-btn" aria-label="Scroll down">↓</button>
+  </section>
+
+  <!-- Our Story Section -->
+  <section class="section story" id="about">
+    <div class="container">
+      <div class="story-container">
+        <div class="story-text animate-on-scroll">
+          <h2 class="section-title">Our Story</h2>
+          <p class="section-subtitle">The perfect blend of Italian tradition and modern innovation</p>
+          <div class="story-paragraphs">
+            <p>Founded in Milan in 2015 by Master Gelatier Marco Rossi, Gelato Gallery was born from a passion for authentic Italian craftsmanship and a vision to elevate gelato to an art form.</p>
+            <p>Every flavor we create tells a story—a narrative of carefully selected ingredients, time-honored techniques, and unexpected twists that surprise and delight. We source only the finest ingredients from around the world, from Sicilian pistachios to Madagascar vanilla, ensuring each scoop is an unforgettable experience.</p>
+            <p>What sets us apart is our dedication to pushing boundaries. Our lab is where tradition meets innovation, where classics are reimagined, and where pop culture inspires new flavor sensations that captivate the palate and imagination alike.</p>
+          </div>
+          <button class="btn">Read More</button>
+        </div>
+        <div class="story-image animate-on-scroll">
+          <div class="story-image-wrapper">
+            <div class="story-blob blob-pink"></div>
+            <img src="https://images.unsplash.com/photo-1563589173312-476d8c36b242?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" alt="Gelato making process" class="story-img">
+            <div class="story-blob blob-green"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Flavors Section -->
+  <section class="section flavors" id="flavors">
+    <div class="container">
+      <div class="section-header text-center animate-on-scroll">
+        <h2 class="section-title" style="text-align: center;">Our Flavors</h2>
+        <p class="section-subtitle" style="text-align: center; margin-left: auto; margin-right: auto;">Crafted with passion, inspired by imagination</p>
+      </div>
+      <div class="flavors-grid">
+        <div class="flavor-card animate-on-scroll">
+          <img src="https://images.unsplash.com/photo-1568464774940-a3de36f824a5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1287&q=80" alt="Pistachio Perfection" class="flavor-image">
+          <div class="flavor-content">
+            <h3 class="flavor-title">Pistachio Perfection</h3>
+            <p class="flavor-description">Sicilian pistachios blended into a creamy masterpiece, with subtle hints of vanilla and sea salt.</p>
+            <div class="flavor-tags">
+              <span class="flavor-tag">Classic</span>
+              <span class="flavor-tag">Bestseller</span>
+            </div>
+          </div>
+        </div>
+        <div class="flavor-card animate-on-scroll">
+          <img src="https://images.unsplash.com/photo-1579954115563-e72bf1381629?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Wild Berry Symphony" class="flavor-image">
+          <div class="flavor-content">
+            <h3 class="flavor-title">Wild Berry Symphony</h3>
+            <p class="flavor-description">A harmonious blend of raspberries, blackberries, and blueberries, with a touch of garden mint.</p>
+            <div class="flavor-tags">
+              <span class="flavor-tag">Vegan</span>
+              <span class="flavor-tag">Seasonal</span>
+            </div>
+          </div>
+        </div>
+        <div class="flavor-card animate-on-scroll">
+          <img src="https://images.unsplash.com/photo-1587314168485-3236d6710814?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Midnight Chocolate" class="flavor-image">
+          <div class="flavor-content">
+            <h3 class="flavor-title">Midnight Chocolate</h3>
+            <p class="flavor-description">Intense dark chocolate with 72% cacao, artfully balanced with a whisper of sea salt caramel.</p>
+            <div class="flavor-tags">
+              <span class="flavor-tag">Signature</span>
+              <span class="flavor-tag">Award-winning</span>
+            </div>
+          </div>
+        </div>
+        <div class="flavor-card animate-on-scroll">
+          <img src="https://images.unsplash.com/photo-1559905493-5661d9173d52?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1335&q=80" alt="Dolce Vita" class="flavor-image">
+          <div class="flavor-content">
+            <h3 class="flavor-title">Dolce Vita</h3>
+            <p class="flavor-description">Fresh mascarpone cream infused with espresso and a delicate chocolate ribbon.</p>
+            <div class="flavor-tags">
+              <span class="flavor-tag">Classic Italian</span>
+              <span class="flavor-tag">Caffeinated</span>
+            </div>
+          </div>
+        </div>
+        <div class="flavor-card animate-on-scroll">
+          <img src="https://images.unsplash.com/photo-1516043827470-d52c543c438f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1480&q=80" alt="Pop Star" class="flavor-image">
+          <div class="flavor-content">
+            <h3 class="flavor-title">Pop Star</h3>
+            <p class="flavor-description">Our tribute to pop culture—champagne-infused gelato with popping candy and edible gold.</p>
+            <div class="flavor-tags">
+              <span class="flavor-tag">Limited Edition</span>
+              <span class="flavor-tag">Celebration</span>
+            </div>
+          </div>
+        </div>
+        <div class="flavor-card animate-on-scroll">
+          <img src="https://images.unsplash.com/photo-1633933873686-1eb8d27be31c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1364&q=80" alt="Mediterranean Dream" class="flavor-image">
+          <div class="flavor-content">
+            <h3 class="flavor-title">Mediterranean Dream</h3>
+            <p class="flavor-description">Fragrant lemon zest, fresh basil, and a hint of lavender in a creamy base.</p>
+            <div class="flavor-tags">
+              <span class="flavor-tag">Herbaceous</span>
+              <span class="flavor-tag">Summer Special</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Locations Section -->
+  <section class="section locations" id="locations">
+    <div class="container">
+      <div class="section-header text-center animate-on-scroll">
+        <h2 class="section-title" style="text-align: center;">Our Locations</h2>
+        <p class="section-subtitle" style="text-align: center; margin-left: auto; margin-right: auto;">Find our artisanal gelato galleries around the world</p>
+      </div>
+      <div class="locations-grid">
+        <div class="location-card animate-on-scroll">
+          <div class="location-image-container">
+            <img src="https://images.unsplash.com/photo-1516483638261-f4dbaf036963?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1286&q=80" alt="Milan, Italy" class="location-image">
+            <div class="location-badge badge-pink">Milan, Italy</div>
+          </div>
+          <div class="location-content">
+            <div class="location-name">
+              <span>📍</span>
+              <div>
+                <h3 class="location-name-text">Milan Gelato Gallery</h3>
+                <p class="location-address">Via Montenapoleone, 24</p>
+              </div>
+            </div>
+            <div class="location-details">
+              <p>Hours: 10:00 - 22:00</p>
+              <p>Phone: +39 02 1234 5678</p>
+            </div>
+            <a href="#" class="location-btn">View Store</a>
+          </div>
+        </div>
+        <div class="location-card animate-on-scroll">
+          <div class="location-image-container">
+            <img src="https://images.unsplash.com/photo-1496442226666-8d4d0e62e6e9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="New York, USA" class="location-image">
+            <div class="location-badge badge-yellow">New York, USA</div>
+          </div>
+          <div class="location-content">
+            <div class="location-name">
+              <span>📍</span>
+              <div>
+                <h3 class="location-name-text">New York Gelato Gallery</h3>
+                <p class="location-address">5th Avenue, 263</p>
+              </div>
+            </div>
+            <div class="location-details">
+              <p>Hours: 11:00 - 23:00</p>
+              <p>Phone: +1 212 555 6789</p>
+            </div>
+            <a href="#" class="location-btn">View Store</a>
+          </div>
+        </div>
+        <div class="location-card animate-on-scroll">
+          <div class="location-image-container">
+            <img src="https://images.unsplash.com/photo-1596787659400-40352dfa4d35?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1287&q=80" alt="Buenos Aires, Argentina" class="location-image">
+            <div class="location-badge badge-green">Buenos Aires, Argentina</div>
+          </div>
+          <div class="location-content">
+            <div class="location-name">
+              <span>📍</span>
+              <div>
+                <h3 class="location-name-text">Buenos Aires Gelato Gallery</h3>
+                <p class="location-address">Palermo, Av. Libertador 3720</p>
+              </div>
+            </div>
+            <div class="location-details">
+              <p>Hours: 12:00 - 00:00</p>
+              <p>Phone: +54 11 4321 5678</p>
+            </div>
+            <a href="#" class="location-btn">View Store</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Lab Section -->
+  <section class="section lab" id="lab">
+    <div class="container">
+      <div class="section-header animate-on-scroll">
+        <h2 class="section-title">The Lab</h2>
+        <p class="section-subtitle">Where innovation meets tradition to create extraordinary gelato experiences</p>
+      </div>
+      <div class="lab-grid">
+        <div class="lab-image animate-on-scroll">
+          <div class="lab-blob lab-blob-red"></div>
+          <img src="https://images.unsplash.com/photo-1563291589-4e9a1757428d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1287&q=80" alt="Gelato innovation lab" class="lab-img">
+          <div class="lab-blob lab-blob-yellow"></div>
+        </div>
+        <div class="lab-features animate-on-scroll">
+          <div class="lab-feature">
+            <div class="feature-icon icon-pink">🧪</div>
+            <h3 class="feature-title">Flavor Innovation</h3>
+            <p class="feature-text">Our flavor artists constantly experiment with unexpected ingredient combinations, pushing the boundaries of what gelato can be. From cocktail-inspired creations to collaborations with renowned chefs, our innovation lab is where gelato dreams become reality.</p>
+          </div>
+          <div class="lab-feature">
+            <div class="feature-icon icon-green">✨</div>
+            <h3 class="feature-title">Texture Exploration</h3>
+            <p class="feature-text">We're obsessed with creating the perfect mouthfeel. Our lab explores various techniques to achieve the ideal balance of creaminess and structure, often incorporating unexpected elements like crispy inclusions or velvet-smooth infusions.</p>
+          </div>
+          <div class="lab-feature">
+            <div class="feature-icon icon-yellow">⚡</div>
+            <h3 class="feature-title">Limited Editions</h3>
+            <p class="feature-text">Our lab is where we craft our coveted limited-edition flavors, often inspired by art, fashion, and cultural moments. These exclusive creations are available for a short time, making each visit to Gelato Gallery a unique experience.</p>
+          </div>
+          <button class="btn btn-white">Discover The Process</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Newsletter Section -->
+  <section class="section newsletter" id="newsletter">
+    <div class="newsletter-blobs">
+      <div class="newsletter-blob newsletter-blob-1"></div>
+      <div class="newsletter-blob newsletter-blob-2"></div>
+    </div>
+    <div class="container">
+      <div class="newsletter-content animate-on-scroll">
+        <h2 class="section-title">Stay Connected</h2>
+        <p class="section-subtitle">Subscribe to our newsletter for exclusive flavors, events, and special offers</p>
+        <form class="newsletter-form">
+          <input type="email" class="newsletter-input" placeholder="Your email address">
+          <button type="submit" class="btn newsletter-btn">Subscribe</button>
+        </form>
+        <p class="newsletter-disclaimer">By subscribing, you agree to receive marketing communications from us. Don't worry, we respect your privacy and you can unsubscribe anytime.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-column">
+          <h3>Gelato Gallery</h3>
+          <p>Artisanal gelato that merges tradition with innovation and pop culture.</p>
+          <div class="social-links">
+            <a href="#" class="social-link">📷</a>
+            <a href="#" class="social-link">👤</a>
+            <a href="#" class="social-link">🐦</a>
+          </div>
+        </div>
+        <div class="footer-column">
+          <h4 style="font-size: 1.25rem; margin-bottom: 1.5rem;">Navigation</h4>
+          <ul class="footer-links">
+            <li class="footer-link"><a href="#home">Home</a></li>
+            <li class="footer-link"><a href="#about">Our Story</a></li>
+            <li class="footer-link"><a href="#flavors">Flavors</a></li>
+            <li class="footer-link"><a href="#locations">Locations</a></li>
+            <li class="footer-link"><a href="#lab">The Lab</a></li>
+          </ul>
+        </div>
+        <div class="footer-column">
+          <h4 style="font-size: 1.25rem; margin-bottom: 1.5rem;">Contact</h4>
+          <div class="footer-info">Main: Via Montenapoleone, 24, Milan</div>
+          <div class="footer-info">Phone: +39 02 1234 5678</div>
+          <div class="footer-info">Email: hello@gelatogallery.com</div>
+        </div>
+        <div class="footer-column">
+          <h4 style="font-size: 1.25rem; margin-bottom: 1.5rem;">Opening Hours</h4>
+          <div class="footer-info">Monday - Thursday: 11:00 - 22:00</div>
+          <div class="footer-info">Friday - Saturday: 10:00 - 23:00</div>
+          <div class="footer-info">Sunday: 10:00 - 22:00</div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div class="copyright">© 2025 Gelato Gallery. All rights reserved.</div>
+        <div class="footer-bottom-links">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Service</a>
+          <div class="language-selector">
+            <span>Language:</span>
+            <select class="language-dropdown">
+              <option value="en">EN</option>
+              <option value="it">IT</option>
+              <option value="es">ES</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scroll to Top Button -->
+  <button class="scroll-top" id="scrollTop" aria-label="Scroll to top">↑</button>
+
+  <!-- JavaScript -->
+  <script>
+    // Mobile menu toggle
+    const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const closeMenuBtn = document.querySelector('.close-menu');
+    const mobileLinks = document.querySelectorAll('.mobile-link');
+
+    mobileMenuBtn.addEventListener('click', () => {
+      mobileMenu.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    });
+
+    closeMenuBtn.addEventListener('click', () => {
+      mobileMenu.classList.remove('active');
+      document.body.style.overflow = '';
+    });
+
+    mobileLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.remove('active');
+        document.body.style.overflow = '';
+      });
+    });
+
+    // Sticky Header
+    window.addEventListener('scroll', () => {
+      const header = document.getElementById('header');
+      if (window.scrollY > 20) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    });
+
+    // Scroll to Top Button
+    const scrollTopButton = document.getElementById('scrollTop');
+
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 300) {
+        scrollTopButton.classList.add('visible');
+      } else {
+        scrollTopButton.classList.remove('visible');
+      }
+    });
+
+    scrollTopButton.addEventListener('click', () => {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    });
+
+    // Smooth Scroll for Anchor Links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        
+        const targetId = this.getAttribute('href');
+        if (targetId === '#') return;
+        
+        const targetElement = document.querySelector(targetId);
+        if (targetElement) {
+          targetElement.scrollIntoView({
+            behavior: 'smooth'
+          });
+        }
+      });
+    });
+
+    // Scroll Animation
+    const animateOnScroll = () => {
+      const elements = document.querySelectorAll('.animate-on-scroll');
+      
+      elements.forEach((element) => {
+        const elementTop = element.getBoundingClientRect().top;
+        const windowHeight = window.innerHeight;
+        
+        // When element comes into view (with some offset)
+        if (elementTop < windowHeight - 100) {
+          element.classList.add('animated');
+        }
+      });
+    };
     
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
-  </head>
-
-  <body>
-    <div id="root"></div>
-    <!-- IMPORTANT: DO NOT REMOVE THIS SCRIPT TAG OR THIS VERY COMMENT! -->
-    <script src="https://cdn.gpteng.co/gptengineer.js" type="module"></script>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
+    // Run once on load
+    window.addEventListener('load', animateOnScroll);
+    
+    // Run on scroll
+    window.addEventListener('scroll', animateOnScroll);
+  </script>
+</body>
 </html>
